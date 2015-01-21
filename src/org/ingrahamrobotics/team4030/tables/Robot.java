@@ -25,7 +25,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		tables = new RobotTables();
-		tables.run();
+		tables.run("10.40.30.255");
 		RobotTablesClient client = tables.getClientInterface();
 		robotTable = client.publishTable("robot");
 	}
@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		long now = System.currentTimeMillis();
-		if (lastDebugMessage >= now - 1000) {
+		if (lastDebugMessage <= now - 1000) {
 			lastDebugMessage = now;
 			robotTable.set("message-" + now, String.valueOf(now));
 		}
